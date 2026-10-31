@@ -92,27 +92,6 @@ package () {
   cd "${srcdir}/dfarc-${_dfarc}"
   make DESTDIR="${pkgdir}" install
 
-  # Packaging Files - use for all the same quality icons.
-  rm -r "${pkgdir}"/usr/share/pixmaps
-  rm "${pkgdir}"/usr/share/icons/hicolor/32x32/mimetypes/application-x-dmod.png
-
-  # Get the images for the launcher.
-  install -Dm644 "${srcdir}"/freedink-${_engine}/android/res/drawable-xxhdpi/ic_launcher.png \
-                 "${pkgdir}"/usr/share/icons/hicolor/256x256/apps/freedink.png
-  install -Dm644 "${srcdir}"/dfarc-${_dfarc}/share/pixmaps/dfarc.png \
-                 "${pkgdir}"/usr/share/icons/hicolor/32x32/apps/freedink.png
-
-  # Use symlinks for the mimetype's image (instead of duplicated images).
-  mkdir -p "${pkgdir}"/usr/share/icons/hicolor/{32x32,256x256,scalable}/mimetypes/
-  ln -s ../apps/freedink.png "${pkgdir}"/usr/share/icons/hicolor/32x32/mimetypes/application-x-dmod.png
-  ln -s ../apps/freedink.png "${pkgdir}"/usr/share/icons/hicolor/256x256/mimetypes/application-x-dmod.png
-  ln -s ../apps/freedink.svg "${pkgdir}"/usr/share/icons/hicolor/scalable/mimetypes/application-x-dmod.svg
-
-  # The launcher associated to the mimetype uses this icon.
-  ln -s ../apps/freedink.png "${pkgdir}"/usr/share/icons/hicolor/32x32/apps/dfarc.png
-  ln -s ../apps/freedink.png "${pkgdir}"/usr/share/icons/hicolor/256x256/apps/dfarc.png
-  ln -s ../apps/freedink.svg "${pkgdir}"/usr/share/icons/hicolor/scalable/apps/dfarc.svg
-
   # Packaging Files - as there is just one icon, show only one launcher for all.
   rm "${pkgdir}"/usr/share/applications/freedinkedit.desktop
 
